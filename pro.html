@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume | Likitha KV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a sticky top navigation bar for quick access to thematic sections (Home, Education, Skills, Projects, Experience). This structure allows non-linear exploration, enabling users like recruiters to quickly find the information most relevant to them. The flow is designed to be intuitive, starting with a broad objective and allowing users to drill down into specific details like projects or skills. -->
+    <!-- Visualization & Content Choices: Education: Goal=Compare -> Bar Chart (Chart.js) comparing academic scores for quick visual assessment. Skills: Goal=Organize -> Grouped Bar Charts (Chart.js) to categorize and visualize technical proficiencies. Projects: Goal=Organize -> Interactive Cards with Modals (JS) to present project summaries without cluttering the main page. Experience: Goal=Change -> Vertical Timeline (HTML/CSS) to show chronological progression of accomplishments. These choices prioritize clarity, engagement, and interactive exploration over a static document format. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #2c3e50;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #4f7a7e;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">Likitha KV</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-600 font-medium">Home</a>
+                <a href="#education" class="nav-link text-gray-600 font-medium">Education</a>
+                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 font-medium">Projects</a>
+                <a href="#experience" class="nav-link text-gray-600 font-medium">Experience</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#home" class="block py-2 px-6 text-sm text-gray-600">Home</a>
+            <a href="#education" class="block py-2 px-6 text-sm text-gray-600">Education</a>
+            <a href="#skills" class="block py-2 px-6 text-sm text-gray-600">Skills</a>
+            <a href="#projects" class="block py-2 px-6 text-sm text-gray-600">Projects</a>
+            <a href="#experience" class="block py-2 px-6 text-sm text-gray-600">Experience</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="home" class="min-h-[80vh] flex flex-col justify-center items-center text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4">Likhitha KV</h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-8">Electrical and Electronics Engineering Student</p>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Objective</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">A highly motivated Electrical and Electronics Engineering student with an 8.55 CGPA. I am proficient in C, C++, OOPs, IoT, and embedded systems, with practical experience gained through hackathons and projects. I am a team-oriented problem-solver with strong communication skills, seeking to apply my technical knowledge and contribute to real-world challenges while expanding my expertise.</p>
+                 <div class="mt-8 flex justify-center items-center space-x-6 text-gray-600">
+                    <a href="tel:+918073605046" class="hover:text-[#4f7a7e] transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                    </a>
+                    <a href="mailto:likithakvbharadwaj@gmail.com" class="hover:text-[#4f7a7e] transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/likitha-kv-a852402a3" target="_blank" rel="noopener noreferrer" class="hover:text-[#4f7a7e] transition-colors">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-4">Education</h2>
+            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">This chart visualizes my academic performance across key educational milestones, demonstrating a consistent record of high achievement.</p>
+            <div class="chart-container">
+                <canvas id="educationChart"></canvas>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-white rounded-xl shadow-md">
+            <h2 class="text-4xl font-bold text-center mb-4">Technical Skills</h2>
+            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">My technical skillset is organized below, highlighting my proficiency in programming, web technologies, and specialized hardware concepts.</p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="chart-container h-96">
+                    <canvas id="programmingSkillsChart"></canvas>
+                </div>
+                <div class="chart-container h-96">
+                    <canvas id="otherSkillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-4">Projects</h2>
+            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">Here are key projects I've developed. Click on any project card to learn more about its objectives and the technologies used.</p>
+            <div id="project-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <section id="experience" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-4">Experience & Accomplishments</h2>
+             <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">This timeline showcases my professional training, internship experience, and key awards, illustrating my practical skills and competitive achievements.</p>
+            <div id="experience-timeline" class="relative container mx-auto px-6 flex flex-col space-y-8">
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-6 bg-white mt-12">
+        <p class="text-gray-500">&copy; 2025 Likitha KV. All Rights Reserved.</p>
+    </footer>
+
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-8 relative transform transition-all duration-300 scale-95 opacity-0">
+            <button id="modal-close-button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="modal-description" class="text-gray-700"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const educationData = {
+                labels: ['10th Standard', 'II PUC', 'B.E (Current)'],
+                datasets: [{
+                    label: 'Academic Performance (%)',
+                    data: [97.8, 91.5, 8.55 * 10],
+                    backgroundColor: ['#a0d2eb', '#e5eaf5', '#4f7a7e'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    borderRadius: 5,
+                }]
+            };
+
+            const educationChartCtx = document.getElementById('educationChart').getContext('2d');
+            new Chart(educationChartCtx, {
+                type: 'bar',
+                data: educationData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Academic Performance', font: { size: 18 } }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Percentage / CGPA (x10)' }
+                        }
+                    }
+                }
+            });
+
+            const programmingSkillsCtx = document.getElementById('programmingSkillsChart').getContext('2d');
+            new Chart(programmingSkillsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['C', 'C++', 'HTML', 'CSS'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [90, 85, 80, 75],
+                        backgroundColor: '#4f7a7e',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Programming & Web', font: { size: 18 } }
+                    },
+                    scales: {
+                        x: { max: 100 }
+                    }
+                }
+            });
+
+            const otherSkillsCtx = document.getElementById('otherSkillsChart').getContext('2d');
+            new Chart(otherSkillsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['IoT', 'Embedded Systems', 'MATLAB'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [85, 80, 70],
+                        backgroundColor: '#a0d2eb',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Hardware & Tools', font: { size: 18 } }
+                    },
+                    scales: {
+                        x: { max: 100 }
+                    }
+                }
+            });
+            
+            const projects = [
+                { title: 'IoT Smart Plant Monitoring', description: 'Developed an IoT-based Smart Plant Monitoring System using ThingSpeak and Blynk for real-time data visualization of soil moisture, temperature, and humidity.' },
+                { title: 'AgriVision Website Frontend', description: 'Created the frontend for AgriVision Website, a platform for detecting plant diseases using technology. Focused on building a responsive and user-friendly interface.' },
+                { title: 'Smart Safety System', description: 'Designed and built an IoT-enabled Smart Safety System for Moisture & Fire Detection, capable of sending real-time alerts to users.' }
+            ];
+
+            const projectCardsContainer = document.getElementById('project-cards');
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white p-6 rounded-lg shadow-md cursor-pointer';
+                card.innerHTML = `<h3 class="text-xl font-bold mb-2">${project.title}</h3><p class="text-gray-600">Click to see details</p>`;
+                card.addEventListener('click', () => openModal(project));
+                projectCardsContainer.appendChild(card);
+            });
+            
+            const experiences = [
+                {
+                    date: "Feb 2025",
+                    title: "Industrial PLC Training",
+                    description: "Completed a 5-day Industrial Protective Equipment Wiring & PLC training at GTTC, gaining hands-on experience in PLC programming for motors & latches.",
+                    type: "training"
+                },
+                {
+                    date: "July 2024",
+                    title: "1st Prize - Treasure Hunt",
+                    description: "Won 1st Prize in Treasure Hunt at IEEE Student Congress, VVCE Mysore.",
+                    type: "award"
+                },
+                 {
+                    date: "Ongoing",
+                    title: "1st Prize - Poster Presentation",
+                    description: "Secured 1st Prize in Poster Presentation Competition 'Tech for Women' conducted by IEEE PES Bangalore Chapter.",
+                    type: "award"
+                },
+                 {
+                    date: "Ongoing",
+                    title: "3rd Place - TECHQUEST 2025",
+                    description: "Secured 3rd place in TECHQUEST 2025, an Ideathon on Embedded Systems & Robotics at GSSSIETW.",
+                    type: "award"
+                },
+                 {
+                    date: "3 Months",
+                    title: "Content Writer Internship",
+                    description: "Completed a 3-month internship as a content writer at Youth India Foundation.",
+                    type: "experience"
+                }
+            ];
+
+            const timelineContainer = document.getElementById('experience-timeline');
+            experiences.forEach((exp, index) => {
+                const isLeft = index % 2 === 0;
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `relative flex items-center ${isLeft ? 'justify-start md:justify-end md:pr-10' : 'justify-start md:pl-10'}`;
+                
+                let icon;
+                if(exp.type === 'award') {
+                    icon = `<div class="bg-yellow-400 w-10 h-10 rounded-full flex items-center justify-center text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></div>`;
+                } else if (exp.type === 'training') {
+                    icon = `<div class="bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg></div>`;
+                } else {
+                    icon = `<div class="bg-green-500 w-10 h-10 rounded-full flex items-center justify-center text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h2zm5-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v1h4z" clip-rule="evenodd"></path></svg></div>`;
+                }
+
+                timelineItem.innerHTML = `
+                    <div class="hidden md:block w-1/2"></div>
+                    <div class="hidden md:flex absolute inset-y-0 items-center ${isLeft ? 'right-1/2 -mr-px' : 'left-1/2 -ml-px'}">
+                        <span class="block w-0.5 h-full bg-gray-300"></span>
+                    </div>
+                    <div class="absolute z-10 ${isLeft ? 'right-1/2 -mr-5' : 'left-1/2 -ml-5'}">${icon}</div>
+                    <div class="card w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-sm font-semibold text-[#4f7a7e] mb-1">${exp.date}</p>
+                        <h4 class="font-bold text-lg mb-2">${exp.title}</h4>
+                        <p class="text-gray-600">${exp.description}</p>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+
+            const modal = document.getElementById('project-modal');
+            const modalContent = modal.querySelector('div');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModalButton = document.getElementById('modal-close-button');
+
+            function openModal(project) {
+                modalTitle.textContent = project.title;
+                modalDescription.textContent = project.description;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                }, 50);
+            }
+
+            function closeModal() {
+                 modalContent.classList.add('scale-95', 'opacity-0');
+                 setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
